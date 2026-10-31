@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVibe - Plan Your Hangout</title>
+    <link rel="stylesheet" href="plan.css">
+</head>
+<body>
+
+    <div class="form-container" id="formMainContainer">
+        <h1>Hangout Planning Form</h1>
+        <p class="form-subtitle">Please complete the required details to schedule our upcoming meetup.</p>
+
+        <div class="input-row">
+            <div class="input-group">
+                <label for="nameInput">Full Name: <span class="required">*</span></label>
+                <input type="text" id="nameInput" placeholder="Enter your full name" required>
+            </div>
+            <div class="input-group">
+                <label for="nicknameInput">Nickname: <span class="required">*</span></label>
+                <input type="text" id="nicknameInput" placeholder="What should I call you?" required>
+            </div>
+        </div>
+
+        <label>Will you be accompanied by someone?</label>
+        <div class="radio-group">
+            <input type="radio" id="yesCompanion" name="hasCompanion" value="Yes">
+            <label for="yesCompanion" style="font-weight: normal; display: inline;">Yes</label>
+            <input type="radio" id="noCompanion" name="hasCompanion" value="No" checked>
+            <label for="noCompanion" style="font-weight: normal; display: inline;">No (Attending solo)</label>
+        </div>
+
+        <div id="companionSection" class="companion-box" style="display: none;">
+            <div class="input-group">
+                <label for="nameCom">Companion's Full Name: <span class="required">*</span></label>
+                <input type="text" id="nameCom" placeholder="Companion's full name">
+            </div>
+            <div class="input-group" style="margin-top: 10px;">
+                <label for="relationCom">Relationship / Affiliation: <span class="required">*</span></label>
+                <input type="text" id="relationCom" placeholder="e.g., Colleague, Friend">
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <label for="dateSelect">Preferred Date: <span class="required">*</span></label>
+        <input type="date" id="dateSelect" required>
+
+        <label>Preferred Time: <span class="required">*</span></label>
+        <div class="time-range-container">
+            <div class="input-group">
+                <label for="startTime" class="sub-label">Start Time</label>
+                <input type="time" id="startTime">
+            </div>
+            <span class="time-separator">to</span>
+            <div class="input-group">
+                <label for="endTime" class="sub-label">End Time</label>
+                <input type="time" id="endTime">
+            </div>
+        </div>
+        <p id="durationDisplay" class="duration-text"></p>
+
+        <label for="categorySelect">Venue: <span class="required">*</span></label>
+        <select id="categorySelect">
+            <option value="" disabled selected>Select a category</option>
+            <option value="Cafe">Cafe / Coffee Shop</option>
+            <option value="Museum">Museum / Art Gallery</option>
+            <option value="Picnic">Outdoor / Park</option>
+            <option value="Mall">Mall / Shopping</option>
+            <option value="Others">Others / Custom Place</option>
+        </select>
+
+        <div id="locationContainer">
+            <label>Specific Location: <span class="required">*</span></label>
+            <div id="placeCardsContainer" class="place-chips-grid">
+                <p class="placeholder-text">Please select a category above to view available locations.</p>
+            </div>
+            <input type="hidden" id="selectedPlaceInput" value="">
+        </div>
+
+        <div id="customLocationBox" class="custom-location-box" style="display: none;">
+            <div class="input-group">
+                <label for="customPlaceName">Custom Place Name: <span class="required">*</span></label>
+                <input type="text" id="customPlaceName" placeholder="Enter the name of the place">
+            </div>
+
+            <div class="input-group" style="margin-top: 10px;">
+                <label for="customPlaceAddress">Exact Address / Location: <span class="required">*</span></label>
+                <input type="text" id="customPlaceAddress" placeholder="Enter the exact address">
+            </div>
+        </div>
+        
+        <div id="locationDetailsBox" class="location-details-box" style="display: none;">
+            <p class="location-title">📍 Exact Location:</p>
+            <p id="exactAddressText" class="location-address"></p>
+        </div>
+
+        <label>Planned Activities (Select all that apply):</label>
+        <div class="checkbox-group">
+            <div>
+                <input type="checkbox" id="actPicnic" name="activities" value="Picnic & Leisure">
+                <label for="actPicnic" style="font-weight: normal; display: inline;">Picnic & Leisure</label>
+            </div>
+            <div>
+                <input type="checkbox" id="actDining" name="activities" value="Dining / Food Trip">
+                <label for="actDining" style="font-weight: normal; display: inline;">Dining / Food Trip</label>
+            </div>
+            <div>
+                <input type="checkbox" id="actSight" name="activities" value="Sightseeing & Walking">
+                <label for="actSight" style="font-weight: normal; display: inline;">Sightseeing & Walking</label>
+            </div>
+            <div>
+                <input type="checkbox" id="actGames" name="activities" value="Board Games & Recreation">
+                <label for="actGames" style="font-weight: normal; display: inline;">Board Games & Recreation</label>
+            </div>
+            <div>
+                <input type="checkbox" id="actDiscuss" name="activities" value="Casual Discussion">
+                <label for="actDiscuss" style="font-weight: normal; display: inline;">Casual Discussion</label>
+            </div>
+        </div>
+     
+        <hr class="divider">
+
+        <div class="confirmation-checkbox-container">
+            <input type="checkbox" id="confirmCheckbox">
+            <label for="confirmCheckbox" style="font-weight: normal; display: inline; cursor: pointer;">
+                I confirm that all details provided above are accurate and final.
+            </label>
+        </div>
+
+        <button id="submitButton" class="submit-btn" disabled>SUBMIT DETAILS</button>
+    </div>
+
+    <div id="successScreen" class="success-screen" style="display: none;">
+        <div class="success-card">
+            <div class="success-icon">🌻</div>
+            <p id="successMessage" class="success-msg">Thank you and see you, [Nickname]!</p>
+            <div class="success-actions">
+                <button id="resetFormBtn" class="action-btn">Submit Another Response</button>
+                <a href="index.html" class="action-btn-outline">Exit to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="plan.js"></script>
+</body>
+</html>
