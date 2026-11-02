@@ -14,8 +14,7 @@ body {
     color: var(--text-main);
     margin: 0;
     padding: 0;
-    overflow: hidden; 
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,10 +28,12 @@ body {
     align-items: center;
     justify-content: center;
     padding: 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 .landing-logo {
-    width: 1000px; 
+    max-width: min(80vw, 350px); 
     height: auto;
     margin-bottom: 10px;
     margin-top: -5px;;
@@ -40,7 +41,7 @@ body {
 }
 
 .landing-sub {
-    font-size: 25px;
+    font-size: clamp(1rem, 4vw, 25px);
     color: var(--text-muted);
     margin-bottom: 25px;
     margin-top: 15px;;
@@ -59,10 +60,11 @@ body {
     padding: 12px 38px;
     border-radius: 25px;
     border-color: #4A3B40;
+    border: 2px solid #4A3B40;
     text-decoration: none;
     font-style: bold;
     font-weight: bold;
-    font-size: 25px;
+    font-size: clamp(1rem, 4vw, 25px);
     box-shadow: 0 4px 15px rgba(224, 169, 181, 0.4);
     transition: all 0.3s ease;
     
